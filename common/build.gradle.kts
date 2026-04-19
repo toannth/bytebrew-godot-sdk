@@ -12,22 +12,14 @@ plugins {
     alias(libs.plugins.kotlin.serialization) apply false
 }
 
-// -- Load config data class ----------------------------------------------------
-//
-// pluginDir, repositoryRootDir, archiveDir, and all other shared extras are
-// already set on project.extra by base-conventions.  pluginConfig is loaded
-// here for typed member access in createMultiArchive and ktsSourceFiles().
-
-val pluginConfig = loadPluginConfig()
-
 allprojects {
     tasks.withType<JavaCompile> {
         options.compilerArgs.add("-Xlint:unchecked")
-        options.compilerArgs.add("-Xlint:deprecation")
+        options.compilerArgs.add("-Xlint:-deprecation")
     }
 }
 
-// -- Helpers -------------------------------------------------------------------
+apply(from = "$rootDir/config/common.gradle.kts")
 
 /** Returns all *.gradle.kts files under addon/, android/, common/, and ios/. */
 fun ktsSourceFiles(): List<String> {
@@ -39,8 +31,6 @@ fun ktsSourceFiles(): List<String> {
         .sorted()
 }
 
-// -- Tasks ---------------------------------------------------------------------
-
 tasks {
     val pluginDir: String by project.extra
     val repositoryRootDir: String by project.extra
@@ -48,7 +38,6 @@ tasks {
 
     register("build") {
         description = "Builds both Android and iOS"
-        group = "build"
         dependsOn(
             project(":android").tasks.named("buildAndroid"),
             project(":ios").tasks.named("buildiOS"),
@@ -57,7 +46,6 @@ tasks {
 
     register("installToDemo") {
         description = "Installs both the Android and iOS plugins to demo app"
-        group = "install"
         dependsOn(
             project(":android").tasks.named("installToDemoAndroid"),
             project(":ios").tasks.named("installToDemoiOS"),
@@ -66,7 +54,6 @@ tasks {
 
     register("uninstall") {
         description = "Uninstalls all plugins from demo app"
-        group = "uninstall"
         dependsOn(
             project(":android").tasks.named("uninstallAndroid"),
             project(":ios").tasks.named("uninstalliOS"),
@@ -75,13 +62,11 @@ tasks {
 
     register("clean") {
         description = "Cleans all build outputs"
-        group = "clean"
         dependsOn(
             project(":addon").tasks.named("cleanOutput"),
             project(":android").tasks.named("clean"),
-            project(":ios").tasks.named("cleaniOS"),
+            project(":ios").tasks.named("cleaniOSBuild"),
         )
-        delete(layout.projectDirectory.dir(archiveDir))
     }
 
     register<Zip>("createMultiArchive") {
@@ -92,19 +77,13 @@ tasks {
             project(":ios").tasks.named("copyiOSBuildArtifacts"),
         )
 
-        group = "archive"
-        archiveFileName.set("${pluginConfig.pluginName}-Multi-v${pluginConfig.pluginVersion}.zip")
+        archiveFileName.set(project.extra["pluginArchiveMulti"] as String)
         destinationDirectory.set(layout.projectDirectory.dir(archiveDir))
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
         into("res") {
             from(layout.projectDirectory.dir("$pluginDir/android")) { includeEmptyDirs = false }
-            from(layout.projectDirectory.dir("$pluginDir/ios")) {
-                includeEmptyDirs = false
-                // SPM dependency xcframeworks are resolved by Xcode at export time
-                // and must not be included in the distributed plugin archive.
-                exclude("ios/framework/**")
-            }
+            from(layout.projectDirectory.dir("$pluginDir/ios")) { includeEmptyDirs = false }
         }
 
         doLast { println("Multi zip archive created at: ${archiveFile.get().asFile.path}") }
@@ -112,7 +91,6 @@ tasks {
 
     register("createArchives") {
         description = "Creates both the Android and iOS zip archives"
-        group = "archive"
         dependsOn(
             project(":android").tasks.named("createAndroidArchive"),
             project(":ios").tasks.named("createiOSArchive"),
@@ -120,20 +98,9 @@ tasks {
         )
     }
 
-    register("test") {
-        description = "Runs all tests with coverage and prints a formatted summary"
-        group = "verification"
-        // printTestSummary runs testDebugUnitTest and createDebugUnitTestCoverageReport
-        // internally, then prints per-suite pass/fail counts and overall coverage.
-        dependsOn(
-            project(":android").tasks.named("printTestSummary"),
-            project(":ios").tasks.named("testiOS"),
-        )
-    }
-
     register<Exec>("checkEditorConfig") {
         description = "Checks editorconfig compliance of all source files"
-        group = "verification"
+        group = "formatting"
 
         workingDir = file(repositoryRootDir)
 
@@ -154,7 +121,7 @@ tasks {
             ).joinToString(" -o ") { "-name \"$it\"" }
 
         val excludePatterns =
-            listOf("node_modules", ".git", "build", ".gradle", ".idea", "bin")
+            listOf("node_modules", ".git", "build", ".gradle", ".idea")
                 .joinToString(" ") { "-not -path \"*/$it/*\"" }
 
         commandLine(
@@ -176,7 +143,7 @@ tasks {
 
     register<Exec>("checkKtsFormat") {
         description = "Checks ktlint compliance of Gradle Kotlin DSL files (dry-run)"
-        group = "verification"
+        group = "formatting"
 
         workingDir = file(repositoryRootDir)
 
@@ -210,7 +177,7 @@ tasks {
 
     register<Exec>("checkBashScriptFormat") {
         description = "Checks ShellCheck compliance of all shell scripts under script/"
-        group = "verification"
+        group = "formatting"
 
         workingDir = file(repositoryRootDir)
 
@@ -271,7 +238,6 @@ tasks {
 
     register("checkFormat") {
         description = "Validates format in all source code"
-        group = "verification"
         dependsOn(
             project(":addon").tasks.named("checkGdscriptFormat"),
             project(":android").tasks.named("checkJavaFormat"),
@@ -286,7 +252,6 @@ tasks {
 
     register("applyFormat") {
         description = "Formats all source code"
-        group = "formatting"
         dependsOn(
             project(":addon").tasks.named("formatGdscriptSource"),
             project(":android").tasks.named("rewriteRun"),

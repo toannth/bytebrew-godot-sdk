@@ -79,7 +79,7 @@ function run_android_gradle_task()
 	display_step "Running gradle task $gradle_build_task"
 
 	pushd "$COMMON_DIR"
-	"$COMMON_DIR"/gradlew "$gradle_build_task"
+	"$COMMON_DIR"/gradlew "$gradle_build_task" "--stacktrace"
 	popd
 }
 
