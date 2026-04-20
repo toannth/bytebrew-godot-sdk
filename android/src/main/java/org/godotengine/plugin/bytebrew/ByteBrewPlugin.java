@@ -32,8 +32,8 @@ public class ByteBrewPlugin extends GodotPlugin {
 	static final String LOG_TAG = "godot::" + PLUGIN_NAME;
 
 
-	static final String REMOTE_CONFIGS_UPDATED_SIGNAL = "remote_configs_updated";
-	static final String IAP_PURCHASE_RESULT_CALLBACK_SIGNAL = "iap_purchase_result_callback";
+	static final String REMOTE_CONFIGS_LOAD_COMPLETE_SIGNAL = "remote_configs_load_complete";
+	static final String IN_APP_PURCHASE_VALIDATED_SIGNAL = "in_ap_purchase_validated";
 
 	private Activity activity;
 
@@ -88,49 +88,27 @@ public class ByteBrewPlugin extends GodotPlugin {
 
 	@UsedByGodot
 	public void NewProgressionEvent(int progressionType, String environment, String stage) {
-		ByteBrew.NewProgressionEvent(GetProgressionType(progressionType), environment, stage);
+		ByteBrew.NewProgressionEvent(Converters.toProgressionType(progressionType), environment, stage);
 	}
 
 	@UsedByGodot
 	public void NewProgressionEventWithStringValue(int progressionType, String environment, String stage, String value) {
-		ByteBrew.NewProgressionEvent(GetProgressionType(progressionType), environment, stage, value);
+		ByteBrew.NewProgressionEvent(Converters.toProgressionType(progressionType), environment, stage, value);
 	}
 
 	@UsedByGodot
 	public void NewProgressionEventWithFloatValue(int progressionType, String environment, String stage, float value) {
-		ByteBrew.NewProgressionEvent(GetProgressionType(progressionType), environment, stage, value);
-	}
-
-	private static ByteBrewProgressionType GetProgressionType(int progressionType) {
-		switch (progressionType) {
-			case 0:
-				return ByteBrewProgressionType.Started;
-			case 1:
-				return ByteBrewProgressionType.Completed;
-			default:
-				return ByteBrewProgressionType.Failed;
-		}
+		ByteBrew.NewProgressionEvent(Converters.toProgressionType(progressionType), environment, stage, value);
 	}
 
 	@UsedByGodot
 	public void TrackAdEvent(int adType, String adProvider, String adUnitName, double revenue) {
-		ByteBrew.TrackAdEvent(GetAdType(adType), adProvider, adUnitName, revenue);
+		ByteBrew.TrackAdEvent(Converters.toAdType(adType), adProvider, adUnitName, revenue);
 	}
 
 	@UsedByGodot
 	public void TrackAdEventWithAdLocation(int adType, String adProvider, String adUnitName, String adLocation, double revenue) {
-		ByteBrew.TrackAdEvent(GetAdType(adType), adProvider, adUnitName, adLocation, revenue);
-	}
-
-	private static ByteBrewAdType GetAdType(int adType) {
-		switch (adType) {
-			case 0:
-				return ByteBrewAdType.Interstitial;
-			case 1:
-				return ByteBrewAdType.Reward;
-			default:
-				return ByteBrewAdType.Banner;
-		}
+		ByteBrew.TrackAdEvent(Converters.toAdType(adType), adProvider, adUnitName, adLocation, revenue);
 	}
 
 	@UsedByGodot
@@ -147,7 +125,7 @@ public class ByteBrewPlugin extends GodotPlugin {
 	public void ValidateGoogleInAppPurchaseEvent(String store, String currency, float amount, String itemID, String category, String receipt, String signature) {
 		ByteBrew.ValidateGoogleInAppPurchaseEvent(store, currency, amount, itemID, category, receipt, signature, new PurchaseResponseListener() {
 			public void purchaseValidated(ByteBrewPurchaseResult purchaseResult) {
-				emitSignal(SIGNAL_NAME_REVIEW_INFO_GENERATED);
+				emitSignal(IN_APP_PURCHASE_VALIDATED_SIGNAL, Converters.ByteBrewPurchaseResult(purchaseResult));
 			}
 		});
 	}
@@ -156,7 +134,7 @@ public class ByteBrewPlugin extends GodotPlugin {
 	public void LoadRemoteConfigs() {
 		ByteBrew.LoadRemoteConfigs(new RemoteConfigListener() {
 			public void RetrievedConfigs(boolean status) {
-				emitSignal(REMOTE_CONFIGS_UPDATED_SIGNAL, status);
+				emitSignal(REMOTE_CONFIGS_LOAD_COMPLETE_SIGNAL, status);
 			}
 		});
 	}
@@ -194,8 +172,9 @@ public class ByteBrewPlugin extends GodotPlugin {
 	@Override
 	public Set<SignalInfo> getPluginSignals() {
 		Set<SignalInfo> signals = new HashSet<>();
-		signals.add(new SignalInfo(REMOTE_CONFIGS_UPDATED_SIGNAL, Boolean.class));
-		signals.add(new SignalInfo(IAP_PURCHASE_RESULT_CALLBACK_SIGNAL, Dictionary.class));
+
+		signals.add(new SignalInfo(REMOTE_CONFIGS_LOAD_COMPLETE_SIGNAL, Boolean.class));
+		signals.add(new SignalInfo(IN_APP_PURCHASE_VALIDATED_SIGNAL, Dictionary.class));
 
 		return signals;
 	}

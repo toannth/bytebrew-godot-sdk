@@ -69,7 +69,7 @@ android {
     libraryVariants.all {
         outputs.all {
             (this as LibraryVariantOutputImpl).outputFileName =
-                "${project.extra["pluginAarName"]}-$name.aar"
+                "${project.extra["pluginName"]}-$name.aar"
         }
     }
 }
@@ -134,7 +134,7 @@ fun TaskContainerScope.registerAndroidBuildVariant(variant: String) {
         }
 
         from("$projectDir/build/outputs/aar") {
-            include("${project.extra["pluginAarName"]}-$variant.aar")
+            include("${project.extra["pluginName"]}-$variant.aar")
             into("addons/${project.extra["pluginName"]}/bin/$variant")
         }
 

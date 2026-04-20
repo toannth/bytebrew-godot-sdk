@@ -28,9 +28,6 @@ extra.apply {
     )
     set("godotAarFile", "godot-lib-${get("godotVersion")}.${get("godotReleaseType")}.aar")
 
-    // Output aar library name
-    set("pluginAarName", "${get("pluginName")}".lowercase())
-
     // Release archive
     set("pluginArchiveAndroid", "${get("pluginName")}-Android-v${get("pluginVersion")}.zip")
 }
