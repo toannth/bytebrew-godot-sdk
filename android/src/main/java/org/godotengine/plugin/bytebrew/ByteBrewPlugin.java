@@ -5,12 +5,9 @@
 package org.godotengine.plugin.bytebrew;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.View;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.godotengine.godot.Godot;
@@ -20,12 +17,9 @@ import org.godotengine.godot.plugin.SignalInfo;
 import org.godotengine.godot.plugin.UsedByGodot;
 
 import com.bytebrew.bytebrewlibrary.ByteBrew;
-import com.bytebrew.bytebrewlibrary.ByteBrewAdType;
-import com.bytebrew.bytebrewlibrary.ByteBrewProgressionType;
 import com.bytebrew.bytebrewlibrary.ByteBrewPurchaseResult;
 import com.bytebrew.bytebrewlibrary.PurchaseResponseListener;
 import com.bytebrew.bytebrewlibrary.RemoteConfigListener;
-
 
 public class ByteBrewPlugin extends GodotPlugin {
 	public static final String PLUGIN_NAME = "ByteBrew";
@@ -44,6 +38,11 @@ public class ByteBrewPlugin extends GodotPlugin {
 	@UsedByGodot
 	public void InitializeByteBrew(String appID, String appKey, String engineVersion, String buildVersion) {
 		ByteBrew.InitializeByteBrew(appID, appKey, engineVersion, buildVersion, activity.getApplicationContext());
+	}
+
+	@UsedByGodot
+	public static boolean IsByteBrewInitialized() {
+		return ByteBrew.IsByteBrewInitialized();
 	}
 
 	@UsedByGodot
@@ -125,7 +124,7 @@ public class ByteBrewPlugin extends GodotPlugin {
 	public void ValidateGoogleInAppPurchaseEvent(String store, String currency, float amount, String itemID, String category, String receipt, String signature) {
 		ByteBrew.ValidateGoogleInAppPurchaseEvent(store, currency, amount, itemID, category, receipt, signature, new PurchaseResponseListener() {
 			public void purchaseValidated(ByteBrewPurchaseResult purchaseResult) {
-				emitSignal(IN_APP_PURCHASE_VALIDATED_SIGNAL, Converters.ByteBrewPurchaseResult(purchaseResult));
+				emitSignal(IN_APP_PURCHASE_VALIDATED_SIGNAL, Converters.toGodotDictionary(purchaseResult));
 			}
 		});
 	}

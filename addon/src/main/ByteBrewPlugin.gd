@@ -17,6 +17,9 @@ var ios_export_plugin: IosExportPlugin
 
 
 func _enter_tree() -> void:
+	# Add autoload singleton for easy access	
+	add_autoload_singleton(PLUGIN_NAME, "res://addons/bytebrew/@pluginNodeName@.gd")
+
 	android_export_plugin = AndroidExportPlugin.new()
 	add_export_plugin(android_export_plugin)
 	ios_export_plugin = IosExportPlugin.new()
@@ -24,6 +27,9 @@ func _enter_tree() -> void:
 
 
 func _exit_tree() -> void:
+	# Remove autoload singleton
+	remove_autoload_singleton(PLUGIN_NAME)
+
 	remove_export_plugin(android_export_plugin)
 	android_export_plugin = null
 	remove_export_plugin(ios_export_plugin)
@@ -40,9 +46,9 @@ class AndroidExportPlugin extends EditorExportPlugin:
 
 	func _get_android_libraries(platform: EditorExportPlatform, debug: bool) -> PackedStringArray:
 		if debug:
-			return PackedStringArray(["%s/bin/debug/%s-debug.aar" % [_plugin_name, _plugin_name]])
+			return PackedStringArray(["res://addons/bytebrew/bin/debug/bytebrew-debug.aar"])
 		else:
-			return PackedStringArray(["%s/bin/release/%s-release.aar" % [_plugin_name, _plugin_name]])
+			return PackedStringArray(["res://addons/bytebrew/bin/debug/bytebrew-release.aar"])
 
 
 	func _get_name() -> String:

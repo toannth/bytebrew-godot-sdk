@@ -23,7 +23,6 @@ installreferrer = "2.2"
 [libraries]
 rewrite-static-analysis = { module = "org.openrewrite.recipe:rewrite-static-analysis", version.ref = "rewrite-static-analysis" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
-androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 play-services-ads-identifier = { module = "com.google.android.gms:play-services-ads-identifier", version.ref = "play-services-ads-identifier" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging", version.ref = "firebase-messaging" }
 installreferrer = { module = "com.android.installreferrer:installreferrer", version.ref = "installreferrer" }

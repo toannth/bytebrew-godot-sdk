@@ -69,7 +69,7 @@ android {
     libraryVariants.all {
         outputs.all {
             (this as LibraryVariantOutputImpl).outputFileName =
-                "${project.extra["pluginName"]}-$name.aar"
+                "${project.extra["pluginModuleName"]}-$name.aar"
         }
     }
 }
@@ -129,13 +129,13 @@ fun TaskContainerScope.registerAndroidBuildVariant(variant: String) {
         into("$pluginDir/android")
 
         from("$repositoryRootDir/addon/build/output") {
-            include("addons/${project.extra["pluginName"]}/**")
+            include("addons/${project.extra["pluginModuleName"]}/**")
             include("addons/GMPShared/**")
         }
 
         from("$projectDir/build/outputs/aar") {
-            include("${project.extra["pluginName"]}-$variant.aar")
-            into("addons/${project.extra["pluginName"]}/bin/$variant")
+            include("${project.extra["pluginModuleName"]}-$variant.aar")
+            into("addons/${project.extra["pluginModuleName"]}/bin/$variant")
         }
 
         doLast { println("Android $variant build completed at: ${buildTimestamp()}") }
@@ -193,7 +193,7 @@ tasks {
     register<Delete>("uninstallAndroid") {
         description = "Removes plugin files from demo app (preserves .uid and .import files)"
         delete(
-            fileTree("$demoDir/addons/${project.extra["pluginName"]}") {
+            fileTree("$demoDir/addons/${project.extra["pluginModuleName"]}") {
                 include("**/*")
                 exclude("**/*.uid")
                 exclude("**/*.import")

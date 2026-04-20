@@ -4,7 +4,7 @@
 
 [config]
 name="@pluginName@"
-binary="@pluginName@.xcframework"
+binary="@pluginModuleName@.xcframework"
 
 initialization="@iosInitializationMethod@"
 deinitialization="@iosDeinitializationMethod@"

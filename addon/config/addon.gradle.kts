@@ -38,4 +38,5 @@ extra.apply {
     val moduleName = pluginProperties.getProperty("pluginModuleName")
     set("iosInitializationMethod",   "${moduleName}_plugin_init")
     set("iosDeinitializationMethod", "${moduleName}_plugin_deinit")
+    set("pluginModuleName",          "${moduleName}")
 }

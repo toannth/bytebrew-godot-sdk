@@ -13,7 +13,11 @@ val androidDependencies =
     extensions
         .getByType<VersionCatalogsExtension>()
         .named("libs")
-        .run { libraryAliases.map { findLibrary(it).get().get() } }
+        .run {
+            libraryAliases
+                .filter { it != "rewrite.static.analysis" && it != "kotlinx.serialization.json" }
+                .map { findLibrary(it).get().get() }
+        }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -121,7 +125,7 @@ tasks {
     register<Copy>("copyAssets") {
         description = "Copies plugin assets such as PNG images to the output directory"
         from(addonSrcDir)
-        into("${project.extra["outputDir"]}/addons/${project.extra["pluginName"]}")
+        into("${project.extra["outputDir"]}/addons/${project.extra["pluginModuleName"]}")
         include("**/*.png")
     }
 
@@ -188,7 +192,7 @@ tasks {
         finalizedBy("copyAssets")
 
         from(addonSrcDir)
-        into("${project.extra["outputDir"]}/addons/${project.extra["pluginName"]}")
+        into("${project.extra["outputDir"]}/addons/${project.extra["pluginModuleName"]}")
         include("**/*.gd", "**/*.cfg")
 
         eachFile { println("[DEBUG] Processing file: $relativePath") }
@@ -231,7 +235,7 @@ tasks {
         inputs.property("iosEmbeddedFrameworks", project.extra["iosEmbeddedFrameworks"])
         inputs.property("iosLinkerFlags", project.extra["iosLinkerFlags"])
 
-        outputs.dir("${project.extra["outputDir"]}/addons/${project.extra["pluginName"]}")
+        outputs.dir("${project.extra["outputDir"]}/addons/${project.extra["pluginModuleName"]}")
     }
 
     register<Copy>("generateiOSConfig") {
