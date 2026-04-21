@@ -201,6 +201,16 @@ func get_remote_config(key: String, default_value := "") -> String:
 	return default_value
 
 
+func restart_tracking() -> void:
+	if _plugin_singleton:
+		_plugin_singleton.RestartTracking();
+
+
+func stop_tracking() -> void:
+	if _plugin_singleton:
+		_plugin_singleton.StopTracking();
+
+
 func get_user_id() -> String:
 	if _plugin_singleton:
 		return _plugin_singleton.GetUserID()
