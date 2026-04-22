@@ -175,10 +175,10 @@ class ByteBrewUtils {
 					if (networkCC != null && networkCC.length() == 2)
 						return networkCC;
 				} else {
-					return (context.getResources().getConfiguration()).getLocales().get(0).getCountry();
+					return (context.getResources().getConfiguration()).locale.getCountry();
 				}
 			} else {
-				return (context.getResources().getConfiguration()).getLocales().get(0).getCountry();
+				return (context.getResources().getConfiguration()).locale.getCountry();
 			}
 		} catch (Exception e) {
 			Log.d("ByteBrew Exception", e.getMessage());
