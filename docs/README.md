@@ -1,20 +1,20 @@
 <p align="center">
-	<img width="128" height="128" src="https://raw.githubusercontent.com/godot-mobile-plugins/godot-byte-brew/main/demo/assets/byte-brew-android.png">
+	<img width="128" height="128" src="https://raw.githubusercontent.com/toannth/bytebrew-godot-sdk/main/demo/assets/bytebrew-android.png">
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<img width="128" height="128" src="https://raw.githubusercontent.com/godot-mobile-plugins/godot-byte-brew/main/demo/assets/byte-brew-ios.png">
+	<img width="128" height="128" src="https://raw.githubusercontent.com/toannth/bytebrew-godot-sdk/main/demo/assets/bytebrew-ios.png">
 </p>
 
 <div align="center">
-	<a href="https://github.com/godot-mobile-plugins/godot-byte-brew"><img src="https://img.shields.io/github/stars/godot-mobile-plugins/godot-byte-brew?label=Stars&style=plastic" height="40"/></a>
-	<img src="https://img.shields.io/github/v/release/godot-mobile-plugins/godot-byte-brew?label=Latest%20Release&style=plastic" height="40"/>
-	<img src="https://img.shields.io/github/downloads/godot-mobile-plugins/godot-byte-brew/latest/total?label=Downloads&style=plastic" height="40"/>
-	<img src="https://img.shields.io/github/downloads/godot-mobile-plugins/godot-byte-brew/total?label=Total%20Downloads&style=plastic" height="40"/>
+	<a href="https://github.com/toannth/bytebrew-godot-sdk"><img src="https://img.shields.io/github/stars/toannth/bytebrew-godot-sdk?label=Stars&style=plastic" height="40"/></a>
+	<img src="https://img.shields.io/github/v/release/toannth/bytebrew-godot-sdk?label=Latest%20Release&style=plastic" height="40"/>
+	<img src="https://img.shields.io/github/downloads/toannth/bytebrew-godot-sdk/latest/total?label=Downloads&style=plastic" height="40"/>
+	<img src="https://img.shields.io/github/downloads/toannth/bytebrew-godot-sdk/total?label=Total%20Downloads&style=plastic" height="40"/>
 </div>
 
 <br>
 
 
-# <img src="https://raw.githubusercontent.com/godot-mobile-plugins/godot-byte-brew/main/addon/src/main/icon.png" width="24"> Godot Byte Brew Plugin
+# <img src="https://raw.githubusercontent.com/toannth/bytebrew-godot-sdk/main/addon/src/main/icon.png" width="24"> Godot Byte Brew Plugin
 
 A Godot plugin that provides a unified GDScript interface for getting information on plugin templates on **Android** and **iOS**.
 
@@ -25,7 +25,7 @@ A Godot plugin that provides a unified GDScript interface for getting informatio
 
 <br>
 
-## <img src="https://raw.githubusercontent.com/godot-mobile-plugins/godot-byte-brew/main/addon/src/main/icon.png" width="20"> Table of Contents
+## <img src="https://raw.githubusercontent.com/toannth/bytebrew-godot-sdk/main/addon/src/main/icon.png" width="20"> Table of Contents
 - [Installation](#installation)
 - [Usage](#usage)
 - [Signals](#signals)
@@ -41,7 +41,7 @@ A Godot plugin that provides a unified GDScript interface for getting informatio
 
 <a name="installation"></a>
 
-## <img src="https://raw.githubusercontent.com/godot-mobile-plugins/godot-byte-brew/main/addon/src/main/icon.png" width="20"> Installation
+## <img src="https://raw.githubusercontent.com/toannth/bytebrew-godot-sdk/main/addon/src/main/icon.png" width="20"> Installation
 _Before installing this plugin, make sure to uninstall any previous versions of the same plugin._
 
 _If installing both Android and iOS versions of the plugin in the same project, then make sure that both versions use the same addon interface version._
@@ -50,7 +50,7 @@ There are 2 ways to install the `ByteBrew` plugin into your project:
 - Through the Godot Editor's AssetLib
 - Manually by downloading archives from Github
 
-### <img src="https://raw.githubusercontent.com/godot-mobile-plugins/godot-byte-brew/main/addon/src/main/icon.png" width="18"> Installing via AssetLib
+### <img src="https://raw.githubusercontent.com/toannth/bytebrew-godot-sdk/main/addon/src/main/icon.png" width="18"> Installing via AssetLib
 Steps:
 - search for and select the `ByteBrew` plugin in Godot Editor
 - click `Download` button
@@ -60,10 +60,10 @@ Steps:
 	- click `Install` button
 - enable the plugin via the `Plugins` tab of `Project->Project Settings...` menu, in the Godot Editor
 
-#### <img src="https://raw.githubusercontent.com/godot-mobile-plugins/godot-byte-brew/main/addon/src/main/icon.png" width="16"> Installing both Android and iOS versions of the plugin in the same project
+#### <img src="https://raw.githubusercontent.com/toannth/bytebrew-godot-sdk/main/addon/src/main/icon.png" width="16"> Installing both Android and iOS versions of the plugin in the same project
 When installing via AssetLib, the installer may display a warning that states "_[x number of]_ files conflict with your project and won't be installed." You can ignore this warning since both versions use the same addon code.
 
-### <img src="https://raw.githubusercontent.com/godot-mobile-plugins/godot-byte-brew/main/addon/src/main/icon.png" width="18"> Installing manually
+### <img src="https://raw.githubusercontent.com/toannth/bytebrew-godot-sdk/main/addon/src/main/icon.png" width="18"> Installing manually
 Steps:
 - download release archive from Github
 - unzip the release archive
@@ -72,7 +72,7 @@ Steps:
 
 <a name="usage"></a>
 
-## <img src="https://raw.githubusercontent.com/godot-mobile-plugins/godot-byte-brew/main/addon/src/main/icon.png" width="20"> Usage
+## <img src="https://raw.githubusercontent.com/toannth/bytebrew-godot-sdk/main/addon/src/main/icon.png" width="20"> Usage
 Add `ByteBrew` node to your main scene or an autoload global scene.
 
 - use the `ByteBrew` node's `get_byte_brew()` method to get information on all available plugin templates
@@ -97,21 +97,21 @@ func _on_template_ready(template: ByteBrewInfo):
 
 <a name="signals"></a>
 
-## <img src="https://raw.githubusercontent.com/godot-mobile-plugins/godot-byte-brew/main/addon/src/main/icon.png" width="20"> Signals
+## <img src="https://raw.githubusercontent.com/toannth/bytebrew-godot-sdk/main/addon/src/main/icon.png" width="20"> Signals
 - register listeners to the following signals of the `ByteBrew` node:
 	- `template_ready(a_template: ByteBrewInfo)`
 	- ...
 
 <a name="methods"></a>
 
-## <img src="https://raw.githubusercontent.com/godot-mobile-plugins/godot-byte-brew/main/addon/src/main/icon.png" width="20"> Methods
+## <img src="https://raw.githubusercontent.com/toannth/bytebrew-godot-sdk/main/addon/src/main/icon.png" width="20"> Methods
 - `get_byte_brew() -> Array[ByteBrewInfo]` - returns an array of `ByteBrewInfo` objects
 
 <a name="classes"></a>
 
-## <img src="https://raw.githubusercontent.com/godot-mobile-plugins/godot-byte-brew/main/addon/src/main/icon.png" width="20"> Classes
+## <img src="https://raw.githubusercontent.com/toannth/bytebrew-godot-sdk/main/addon/src/main/icon.png" width="20"> Classes
 
-### <img src="https://raw.githubusercontent.com/godot-mobile-plugins/godot-byte-brew/main/addon/src/main/icon.png" width="16"> ByteBrewInfo
+### <img src="https://raw.githubusercontent.com/toannth/bytebrew-godot-sdk/main/addon/src/main/icon.png" width="16"> ByteBrewInfo
 - Encapsulates plugin template information.
 - Properties:
 	- `description`: description of the template
@@ -120,7 +120,7 @@ func _on_template_ready(template: ByteBrewInfo):
 
 <a name="platform-specific-notes"></a>
 
-## <img src="https://raw.githubusercontent.com/godot-mobile-plugins/godot-byte-brew/main/addon/src/main/icon.png" width="20"> Platform-Specific Notes
+## <img src="https://raw.githubusercontent.com/toannth/bytebrew-godot-sdk/main/addon/src/main/icon.png" width="20"> Platform-Specific Notes
 
 ### Android
 - Download Android export template and enable gradle build from export settings
@@ -141,7 +141,7 @@ func _on_template_ready(template: ByteBrewInfo):
 
 <a name="links"></a>
 
-# <img src="https://raw.githubusercontent.com/godot-mobile-plugins/godot-byte-brew/main/addon/src/main/icon.png" width="24"> Links
+# <img src="https://raw.githubusercontent.com/toannth/bytebrew-godot-sdk/main/addon/src/main/icon.png" width="24"> Links
 
 - [AssetLib Entry Android](https://godotengine.org/asset-library/asset/9999)
 - [AssetLib Entry iOS](https://godotengine.org/asset-library/asset/8888)
@@ -150,7 +150,7 @@ func _on_template_ready(template: ByteBrewInfo):
 
 <a name="all-plugins"></a>
 
-# <img src="https://raw.githubusercontent.com/godot-mobile-plugins/godot-byte-brew/main/addon/src/main/icon.png" width="24"> All Plugins
+# <img src="https://raw.githubusercontent.com/toannth/bytebrew-godot-sdk/main/addon/src/main/icon.png" width="24"> All Plugins
 
 | ✦ | Plugin | Android | iOS | Latest Release | Downloads | Stars |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
@@ -165,25 +165,25 @@ func _on_template_ready(template: ByteBrewInfo):
 | <img src="https://raw.githubusercontent.com/godot-mobile-plugins/godot-qr/main/addon/src/icon.png" width="20"> | [QR](https://github.com/godot-mobile-plugins/godot-qr) | ✅ | ✅ | <a href="https://github.com/godot-mobile-plugins/godot-qr/releases"><img src="https://img.shields.io/github/release-date/godot-mobile-plugins/godot-qr?label=%20" /> <img src="https://img.shields.io/github/v/release/godot-mobile-plugins/godot-qr?label=%20" /></a> | <img src="https://img.shields.io/github/downloads/godot-mobile-plugins/godot-qr/latest/total?label=latest" /> <img src="https://img.shields.io/github/downloads/godot-mobile-plugins/godot-qr/total?label=total" /> | <img src="https://img.shields.io/github/stars/godot-mobile-plugins/godot-qr?style=plastic&label=%20" /> |
 | <img src="https://raw.githubusercontent.com/godot-mobile-plugins/godot-share/main/addon/src/icon.png" width="20"> | [Share](https://github.com/godot-mobile-plugins/godot-share) | ✅ | ✅ | <a href="https://github.com/godot-mobile-plugins/godot-share/releases"><img src="https://img.shields.io/github/release-date/godot-mobile-plugins/godot-share?label=%20" /> <img src="https://img.shields.io/github/v/release/godot-mobile-plugins/godot-share?label=%20" /></a> | <img src="https://img.shields.io/github/downloads/godot-mobile-plugins/godot-share/latest/total?label=latest" /> <img src="https://img.shields.io/github/downloads/godot-mobile-plugins/godot-share/total?label=total" /> | <img src="https://img.shields.io/github/stars/godot-mobile-plugins/godot-share?style=plastic&label=%20" /> |
 | <img src="https://raw.githubusercontent.com/godot-mobile-plugins/godot-vision/main/addon/src/icon.png" width="20"> | [Vision](https://github.com/godot-mobile-plugins/godot-vision) | ⏰  | ⏰  | 🔜 <!-- <a href="https://github.com/godot-mobile-plugins/godot-vision/releases"><img src="https://img.shields.io/github/release-date/godot-mobile-plugins/godot-vision?label=%20" /> <img src="https://img.shields.io/github/v/release/godot-mobile-plugins/godot-vision?label=%20" /></a> --> | - <!-- <img src="https://img.shields.io/github/downloads/godot-mobile-plugins/godot-vision/latest/total?label=latest" /> <img src="https://img.shields.io/github/downloads/godot-mobile-plugins/godot-vision/total?label=%20" /> --> | <img src="https://img.shields.io/github/stars/godot-mobile-plugins/godot-vision?style=plastic&label=%20" /> |
-| <img src="https://raw.githubusercontent.com/godot-mobile-plugins/godot-byte-brew/main/addon/src/main/icon.png" width="20"> | [Byte Brew](https://github.com/godot-mobile-plugins/godot-byte-brew) | ✅ | ✅ | - <!-- <a href="https://github.com/godot-mobile-plugins/godot-byte-brew/releases"><img src="https://img.shields.io/github/release-date/godot-mobile-plugins/godot-byte-brew?label=%20" /> <img src="https://img.shields.io/github/v/release/godot-mobile-plugins/godot-byte-brew?label=%20" /></a> --> | - <!-- <img src="https://img.shields.io/github/downloads/godot-mobile-plugins/godot-byte-brew/latest/total?label=latest" /> <img src="https://img.shields.io/github/downloads/godot-mobile-plugins/godot-byte-brew/total?label=%20" /> --> | <img src="https://img.shields.io/github/stars/godot-mobile-plugins/godot-byte-brew?style=plastic&label=%20" /> |
+| <img src="https://raw.githubusercontent.com/toannth/bytebrew-godot-sdk/main/addon/src/main/icon.png" width="20"> | [Byte Brew](https://github.com/toannth/bytebrew-godot-sdk) | ✅ | ✅ | - <!-- <a href="https://github.com/toannth/bytebrew-godot-sdk/releases"><img src="https://img.shields.io/github/release-date/toannth/bytebrew-godot-sdk?label=%20" /> <img src="https://img.shields.io/github/v/release/toannth/bytebrew-godot-sdk?label=%20" /></a> --> | - <!-- <img src="https://img.shields.io/github/downloads/toannth/bytebrew-godot-sdk/latest/total?label=latest" /> <img src="https://img.shields.io/github/downloads/toannth/bytebrew-godot-sdk/total?label=%20" /> --> | <img src="https://img.shields.io/github/stars/toannth/bytebrew-godot-sdk?style=plastic&label=%20" /> |
 
 <br>
 
 <a name="credits"></a>
 
-# <img src="https://raw.githubusercontent.com/godot-mobile-plugins/godot-byte-brew/main/addon/src/main/icon.png" width="24"> Credits
+# <img src="https://raw.githubusercontent.com/toannth/bytebrew-godot-sdk/main/addon/src/main/icon.png" width="24"> Credits
 
 Developed by [ByteBrewIO](https://github.com/ByteBrewIO)
 
-Original repository: [Godot Byte Brew Plugin](https://github.com/godot-mobile-plugins/godot-byte-brew)
+Original repository: [Godot Byte Brew Plugin](https://github.com/toannth/bytebrew-godot-sdk)
 
 <br>
 
 <a name="contributing"></a>
 
-# <img src="https://raw.githubusercontent.com/godot-mobile-plugins/godot-byte-brew/main/addon/src/main/icon.png" width="24"> Contributing
+# <img src="https://raw.githubusercontent.com/toannth/bytebrew-godot-sdk/main/addon/src/main/icon.png" width="24"> Contributing
 
-See [our guide](https://github.com/godot-mobile-plugins/godot-byte-brew?tab=contributing-ov-file) if you would like to contribute to this project.
+See [our guide](https://github.com/toannth/bytebrew-godot-sdk?tab=contributing-ov-file) if you would like to contribute to this project.
 
 <br>
 
@@ -193,10 +193,10 @@ If this plugin has helped you, consider supporting its development! Every bit of
 
 | ✦ | Ways to Help | How to do it |
 | :--- | :--- | :--- |
-|✨⭐| **Spread the Word** | [Star this repo](https://github.com/godot-mobile-plugins/godot-byte-brew/stargazers) to help others find it. |
-|💡✨| **Give Feedback** | [Open an issue](https://github.com/godot-mobile-plugins/godot-byte-brew/issues) or [suggest a feature](https://github.com/godot-mobile-plugins/godot-byte-brew/issues/new). |
-|🧩| **Contribute** | [Submit a PR](https://github.com/godot-mobile-plugins/godot-byte-brew?tab=contributing-ov-file) to help improve the codebase. |
+|✨⭐| **Spread the Word** | [Star this repo](https://github.com/toannth/bytebrew-godot-sdk/stargazers) to help others find it. |
+|💡✨| **Give Feedback** | [Open an issue](https://github.com/toannth/bytebrew-godot-sdk/issues) or [suggest a feature](https://github.com/toannth/bytebrew-godot-sdk/issues/new). |
+|🧩| **Contribute** | [Submit a PR](https://github.com/toannth/bytebrew-godot-sdk?tab=contributing-ov-file) to help improve the codebase. |
 |❤️| **Buy a Coffee** | Support the maintainers on GitHub Sponsors or other platforms. |
 
 ## ⭐ Star History
-[![Star History Chart](https://api.star-history.com/svg?repos=godot-mobile-plugins/godot-byte-brew&type=Date)](https://star-history.com/#godot-mobile-plugins/godot-byte-brew&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=toannth/bytebrew-godot-sdk&type=Date)](https://star-history.com/#toannth/bytebrew-godot-sdk&Date)
